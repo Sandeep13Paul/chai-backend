@@ -297,7 +297,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
 
     if (!isPasswordCorrect) {
-        throw new ApiError(400, "Invalid password");
+        throw new ApiError(400, "Invalid Old Password");
     }
 
     user.password = newPassword;
@@ -438,7 +438,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         {
             $lookup: {
                 from: "subscriptions",
-                localField: _id,
+                localField: "_id",
                 foreignField: "channel",
                 as: "subscribers"
             }
@@ -446,7 +446,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         {
             $lookup: {
                 from: "subscriptions",
-                localField: _id,
+                localField: "_id",
                 foreignField: "subscriber",
                 as: "subscribedTo"
             }
